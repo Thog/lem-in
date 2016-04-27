@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isstrnum.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/25 13:28:14 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/27 12:17:01 by tguillem         ###   ########.fr       */
+/*   Created: 2016/04/27 15:46:23 by tguillem          #+#    #+#             */
+/*   Updated: 2016/04/27 15:46:41 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-int		main(void)
+int				ft_isstrnum(char *str)
 {
-	t_data		*data;
-
-	data = init_data();
-	parse_stdin(data);
-	destroy_data(&data);
-	return (0);
+	if (!str || !*str)
+		return (0);
+	while (*str)
+		if (!ft_isalnum(*str++))
+			return (0);
+	return (1);
 }
