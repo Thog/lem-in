@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/27 15:46:23 by tguillem          #+#    #+#             */
-/*   Updated: 2016/04/27 15:46:41 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/05/03 00:06:36 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				ft_isstrnum(char *str)
 	if (!str || !*str)
 		return (0);
 	while (*str)
-		if (!ft_isalnum(*str++))
+		if (!ft_isdigit(*str++))
 			return (0);
 	return (1);
 }
