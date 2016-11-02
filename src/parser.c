@@ -1,94 +1,84 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/27 10:56:11 by tguillem          #+#    #+#             */
-/*   Updated: 2016/05/03 02:09:00 by tguillem         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lemin.h"
 
-static int		parse_room(t_data *data, char *str)
+static int		is_command(char *data)
 {
-	char	**split;
+	static int	start_defined = 0;
+	static int	end_defined = 0;
+
+	if (ft_strncmp(data, "##start\0", 8) == 0)
+	{
+		if (start_defined == 1)
+			return (-1);
+		start_defined = 1;
+		return (1);
+	}
+	else if (ft_strncmp(data, "##end\0", 6) == 0)
+	{
+		if (end_defined == 1)
+			return (-1);
+		end_defined = 1;
+		return (2);
+	}
+	return (0);
+}
+
+int				check_command(t_array **map, t_graph **graph)
+{
+	int		cmd;
+
+	if ((cmd = is_command((*map)->data)) == -1 || cmd == 0)
+		return (cmd);
+	if ((*map)->next && (*map)->next->data)
+		*map = (*map)->next;
+	while (is_excluded_command((*map)->data) && (*map)->next && (*map)->next->data)
+		(*map) = (*map)->next;
+	if (!is_valid_identifier((*map)->data, *graph))
+		return (-1);
+	*graph = init_new_graph(*graph, (*map)->data, cmd);
+	return (1);
+}
+
+static t_graph	*parse_graph(t_array *map)
+{
+	t_graph	*graph;
+	int		code;
+
+	code = 1;
+	graph = NULL;
+	while (map && map->data && code == 1)
+	{
+		code = is_excluded_command(map->data);
+		if (!code && is_room_link(map->data))
+			code = compute_connections(&map, &graph);
+		else if (!code && (code = is_valid_identifier(map->data, graph)) == 1)
+			graph = init_new_graph(graph, map->data, 0);
+		code = (!code ? check_command(&map, &graph) : code);
+		if (code != -1)
+			map = map->next;
+	}
+	if (map)
+		map->data = NULL;
+	return (graph);
+}
+
+int				init_data(t_data *data, t_array *map)
+{
 	int		i;
-	t_node	*node;
+	int		error;
 
 	i = 0;
-	split = ft_strsplit(str, ' ');
-	while (split[i])
+	error = 0;
+	while (map && map->data && map->data[i])
 	{
-		if (i > 2 || (i > 0 && !ft_isstrnum(split[i])) ||
-			!ft_isstralnum(split[i]))
-			return (1);
+		if (!ft_isdigit(map->data[i]))
+			error = 1;
 		i++;
 	}
-	node = new_node(split[0], ft_atoi(split[1]), ft_atoi(split[1]));
-	data->nodes = init_nodelst(data->nodes, node);
-	if (data->command_flag == 1 && !data->start)
-		data->start = node;
-	else if (data->command_flag == 2 && !data->end)
-		data->end = node;
-	data->command_flag = 0;
-	return (0);
-}
-
-static int		parse_connection(t_data *data, char *str)
-{
-	char			**split;
-
-	split = ft_strsplit(str, '-');
-	data->connections = init_connection(data->connections, split[0], split[1]);
-	return (0);
-}
-
-static int		parse_line(t_data *data, int index, char *str)
-{
-	char	*tmp;
-
-	if (!*str)
+	if (map->data)
+		data->ant_count = ft_atoi(map->data);
+	data->graph = NULL;
+	if (data->ant_count <= 0 || error == 1)
 		return (1);
-	if (!index)
-		data->ant_count = ft_atoi(str);
-	else
-	{
-		if (!ft_strncmp(str, "##", 2))
-			data->command_flag = !ft_strcmp(str, "start") ? 2 :
-				!ft_strcmp(str, "end");
-		else if (!ft_strchr(str, '#') && !(ft_strchr(str, '#')))
-		{
-			if ((tmp = ft_strchr(str, ' ')) && ft_strchr(tmp + 1, ' ') ==
-				ft_strrchr(tmp + 1, ' '))
-				return (parse_room(data, str));
-			else if ((tmp = ft_strchr(str, '-')) && tmp == ft_strrchr(str, '-'))
-				return (parse_connection(data, str));
-			else
-				return (1);
-		}
-		else
-			return (1);
-	}
+	data->graph = parse_graph(map->next);
 	return (0);
-}
-
-void			*parse_stdin(t_data *data)
-{
-	char	*buffer;
-	int		index;
-
-	index = 0;
-	while (get_next_line(0, &buffer) == 1)
-	{
-		if ((!index && !ft_isstrnum(buffer)))
-			break ;
-		if (parse_line(data, index, buffer))
-			break ;
-		ft_printf("%s\n", buffer);
-		index++;
-	}
-	return (NULL);
 }

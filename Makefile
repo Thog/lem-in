@@ -16,7 +16,7 @@ CC = gcc
 
 NAME = lem-in
 LIB = libft
-SRC = main.c parser.c init.c utils.c
+SRC = main.c parser_links.c parser.c storage.c graph.c validator.c utils.c
 SRCDIR = src
 OUTDIR = out
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
