@@ -114,6 +114,6 @@ void 		store_map(t_array **data)
 		ft_strdel(&buffer);
 	}
 	if (!*data || ret == -1)
-		ft_putstr("ERROR\n");
+		ft_memdel((void**)data);
 	ft_strdel(&buffer);
 }
