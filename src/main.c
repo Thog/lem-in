@@ -8,9 +8,9 @@ int					main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	buffer = NULL;
-	data = NULL;
 	store_map(&buffer);
-	if (buffer && !init_data(data, buffer))
+	data = (t_data*)ft_memalloc(sizeof(t_data));
+	if (buffer && data && !init_data(data, buffer))
 	{
 		// FIXME: Algorithm????
 	}
