@@ -27,3 +27,49 @@ int		is_valid_room_link(char *line, t_graph *graph)
 		return (is_connection_availaible(tmp1, tmp2));
 	return (-1);
 }
+
+static void		compute_weights(t_graph *graph, int weight, int *begin)
+{
+	t_connections	*connections;
+
+	connections = NULL;
+	if (*begin == 0 && graph->begin)
+		*begin = 1;
+	if (graph->weight > weight)
+		graph->weight = weight;
+	if (graph->connections)
+		connections = graph->connections;
+	while (connections)
+	{
+		if (weight < connections->link->weight)
+			compute_weights(connections->link, weight + 1, begin);
+		connections = connections->next;
+	}
+}
+
+int				is_valid(t_graph *graph)
+{
+	t_graph	*end;
+	t_graph	*run;
+	int		begin;
+
+	begin = 0;
+	end = NULL;
+	run = graph;
+	while (run)
+	{
+		if (run->begin)
+			begin = 1;
+		if (run->end)
+			end = run;
+		run = run->next;
+	}
+	if (begin == 1 && end)
+	{
+		begin = 0;
+		compute_weights(end, 0, &begin);
+		if (begin == 1)
+			return (1);
+	}
+	return (0);
+}

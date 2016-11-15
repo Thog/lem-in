@@ -54,4 +54,12 @@ int			compute_connections(t_array **map, t_graph **graph);
 int			check_command(t_array **map, t_graph **graph);
 int			is_connection_availaible(t_graph *first, t_graph *sec);
 t_graph		*init_new_graph(t_graph *graph, char *data, int i);
+t_path		*get_path(t_graph *graph);
+int			ft_count_char(char *str, char c);
+char		*ft_strfjoin(char const *s1, char const *s2);
+void		display_one_path(t_path *path, int ant);
+void		start_resolver(t_data *data);
+t_path		*move_ant(t_data *data, t_path *paths, t_path *move);
+t_path		*get_next_move(t_data *data, char *path, t_path *move);
+int			is_valid(t_graph *graph);
 #endif

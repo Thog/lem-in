@@ -16,7 +16,8 @@ CC = gcc
 
 NAME = lem-in
 LIB = libft
-SRC = main.c parser_links.c parser.c storage.c graph.c validator.c utils.c
+SRC = main.c parser_links.c parser.c storage.c graph.c validator.c utils.c \
+	  algorithm.c algorithm_utils.c get_path.c displayer.c
 SRCDIR = src
 OUTDIR = out
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
@@ -24,7 +25,7 @@ OBJ = $(addprefix $(OUTDIR)/, $(SRC:.c=.o))
 
 $(NAME): $(OUTDIR) $(OBJ)
 	(cd $(LIB) && $(MAKE))
-	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(OBJ) $(PRGFLAGS)
+	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L/tmp/ $(OBJ) $(PRGFLAGS)
 
 all: $(NAME)
 

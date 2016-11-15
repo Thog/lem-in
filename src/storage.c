@@ -74,7 +74,7 @@ static int		is_valid_second(char *line, int *state)
 	return (0);
 }
 
-int				is_valid(char *line)
+int				is_valid_line(char *line)
 {
 	static int	state = 0;
 
@@ -108,7 +108,7 @@ void 		store_map(t_array **data)
 	buffer = NULL;
 	while ((ret = get_next_line(0, &buffer)) > 0)
 	{
-		if (!buffer || !is_valid(buffer))
+		if (!buffer || !is_valid_line(buffer))
 			break ;
 		*data = array_init(*data, ft_strdup(buffer));
 		ft_strdel(&buffer);
