@@ -25,7 +25,7 @@ OBJ = $(addprefix $(OUTDIR)/, $(SRC:.c=.o))
 
 $(NAME): $(OUTDIR) $(OBJ)
 	(cd $(LIB) && $(MAKE))
-	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L/tmp/ $(OBJ) $(PRGFLAGS)
+	$(CC) -o $(NAME) $(CFLAGS) -I./libft -L./libft $(OBJ) $(PRGFLAGS)
 
 all: $(NAME)
 
