@@ -44,6 +44,7 @@ static t_graph		*init_grah(char *data, int cmd)
 	graph->ran = 0;
 	free(data_split[1]);
 	free(data_split[2]);
+	free(data_split);
 	graph->connections = NULL;
 	graph->begin = (cmd == 1 ? '1' : 0);
 	graph->end = (cmd == 2 ? '1' : 0);

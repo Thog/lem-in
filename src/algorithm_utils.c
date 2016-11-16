@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 08:55:48 by tguillem          #+#    #+#             */
-/*   Updated: 2016/11/16 09:02:06 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/11/16 10:14:42 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,22 @@ t_path		*get_next_move(t_data *data, char *path, t_path *move)
 		return (new);
 	move->next = new;
 	return (new);
+}
+
+void		destroy_paths(t_path *path)
+{
+	t_path	*to_del;
+	t_path	*tmp;
+
+	if (path)
+	{
+		tmp = path;
+		while (tmp)
+		{
+			to_del = tmp;
+			tmp = tmp->next;
+			free(to_del->path);
+			free(to_del);
+		}
+	}
 }

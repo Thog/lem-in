@@ -85,13 +85,21 @@ static t_path	*compute_paths(t_graph *graph)
 void			start_resolver(t_data *data)
 {
 	t_path		*paths;
+	t_path		*first_move;
 	t_path		*move;
 
 	move = NULL;
+	first_move = NULL;
 	paths = compute_paths(data->graph);
 	paths = compute_paths_size(paths);
 	if (paths->size == 1)
 		return (display_one_path(paths, data->ant_count));
 	while (data->ant_count > 0 || move)
+	{
+		if (!first_move)
+			first_move = move;
 		move = move_ant(data, paths, move);
+	}
+	destroy_paths(paths);
+	destroy_paths(first_move);
 }

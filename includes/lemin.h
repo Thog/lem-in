@@ -78,4 +78,8 @@ t_path						*move_ant(t_data *data, t_path *paths,
 t_path						*get_next_move(t_data *data, char *path,
 		t_path *move);
 int							is_valid(t_graph *graph);
+void						destroy_paths(t_path *path);
+void						destroy_graph(t_graph *graph);
+void						destroy_split(char **line_split);
+int							destroy_split_ret(char **line_split, int code);
 #endif

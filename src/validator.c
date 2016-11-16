@@ -44,7 +44,7 @@ int				is_valid_room_link(char *line, t_graph *graph)
 	while (link_split[i])
 		i++;
 	if (i != 2 || ft_strcmp(link_split[0], link_split[1]) == 0)
-		return (0);
+		return (destroy_split_ret(link_split, 0));
 	while (graph)
 	{
 		if (ft_strcmp(link_split[0], graph->id) == 0)
@@ -53,6 +53,7 @@ int				is_valid_room_link(char *line, t_graph *graph)
 			tmp2 = graph;
 		graph = graph->next;
 	}
+	destroy_split(link_split);
 	if (tmp1 && tmp2)
 		return (is_connection_availaible(tmp1, tmp2));
 	return (-1);

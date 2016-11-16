@@ -41,6 +41,10 @@ int					main(int ac, char **av)
 	}
 	else
 		ft_putstr("ERROR\n");
+	if (data)
+		destroy_graph(data->graph);
+	ft_memdel((void**)&data);
 	destroy_array(buffer);
+	resource_manager_destroy();
 	return (0);
 }

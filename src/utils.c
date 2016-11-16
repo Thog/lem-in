@@ -47,10 +47,8 @@ int				is_room_link(char *line)
 	line_split = ft_strsplit(line, '-');
 	i = 0;
 	while (line_split[i])
-	{
-		free(line_split[i]);
 		i++;
-	}
+	destroy_split(line_split);
 	if (i != 2)
 		return (0);
 	return (1);
