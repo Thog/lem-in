@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:55:48 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:02:06 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-int		ft_count_char(char *str, char c)
+int			ft_count_char(char *str, char c)
 {
 	int	i;
 
@@ -42,7 +54,7 @@ void		display_one_path(t_path *path, int ant)
 	ft_putendl("");
 }
 
-t_path				*get_next_move(t_data *data, char *path, t_path *move)
+t_path		*get_next_move(t_data *data, char *path, t_path *move)
 {
 	static int	i = 1;
 	char		*str;

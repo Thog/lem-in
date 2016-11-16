@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:57:07 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:07:00 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 int				is_room_id_availaible(char *line, t_graph *graph)
@@ -68,7 +80,7 @@ int				is_valid_identifier(char *line, t_graph *graph)
 	return (0);
 }
 
-int		is_connection_availaible(t_graph *first, t_graph *sec)
+int				is_connection_availaible(t_graph *first, t_graph *sec)
 {
 	t_connections	*tmp;
 

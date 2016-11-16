@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_links.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:56:31 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:06:16 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static void	link_graph_one(t_graph *tmp1, t_graph *tmp2)
@@ -5,7 +17,7 @@ static void	link_graph_one(t_graph *tmp1, t_graph *tmp2)
 	t_connections	*new;
 	t_connections	*run;
 
-	if (!(new = (t_connections*) ft_memalloc(sizeof(t_connections))))
+	if (!(new = (t_connections*)ft_memalloc(sizeof(t_connections))))
 		return ;
 	new->next = NULL;
 	new->link = tmp2;

@@ -1,6 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:57:12 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:09:14 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-int		is_valid_room_link(char *line, t_graph *graph)
+int				validate_block(char *line, int *state)
+{
+	int			nb_exist;
+
+	if (line[*state] == ' ')
+	{
+		(*state)++;
+		while (line[*state] && ft_isdigit(line[*state]))
+		{
+			(*state)++;
+			nb_exist = 1;
+		}
+		if (nb_exist == 1)
+			return (1);
+	}
+	return (0);
+}
+
+int				is_valid_room_link(char *line, t_graph *graph)
 {
 	char	**link_split;
 	int		i;

@@ -1,22 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   storage.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:56:37 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:09:06 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
-
-int				validate_block(char *line, int *state)
-{
-	int			nb_exist;
-
-	if (line[*state] == ' ')
-	{
-		(*state)++;
-		while (line[*state] && ft_isdigit(line[*state]))
-		{
-			(*state)++;
-			nb_exist = 1;
-		}
-		if (nb_exist == 1)
-			return (1);
-	}
-	return (0);
-}
 
 static int		check_number(char *line)
 {
@@ -100,7 +94,7 @@ int				is_valid_line(char *line)
 	return (is_valid_second(line, &state));
 }
 
-void 		store_map(t_array **data)
+void			store_map(t_array **data)
 {
 	char	*buffer;
 	int		ret;

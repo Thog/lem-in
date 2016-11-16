@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   displayer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:56:02 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:04:42 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static void			select_path_next(char **new, t_path **run)
@@ -71,7 +83,7 @@ static t_path		*display_move(t_path *move)
 	return (move);
 }
 
-t_path		*move_ant(t_data *data, t_path *paths, t_path *move)
+t_path				*move_ant(t_data *data, t_path *paths, t_path *move)
 {
 	t_path		*run;
 	t_path		*res;
@@ -81,7 +93,8 @@ t_path		*move_ant(t_data *data, t_path *paths, t_path *move)
 	run = paths;
 	res = move;
 	move = select_path(move);
-	while (run && (data->ant_count >= run->size || i == 0) && data->ant_count > 0)
+	while (run && (data->ant_count >= run->size || i == 0) &&
+			data->ant_count > 0)
 	{
 		i = 1;
 		move = get_next_move(data, run->path, move);

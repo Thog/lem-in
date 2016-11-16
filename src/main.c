@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:56:21 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:03:00 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static void			print_map(t_array *buffer)
@@ -5,7 +17,7 @@ static void			print_map(t_array *buffer)
 	while (buffer)
 	{
 		if (!buffer->data)
-			break;
+			break ;
 		ft_putendl(buffer->data);
 		buffer = buffer->next;
 	}
@@ -26,7 +38,6 @@ int					main(int ac, char **av)
 	{
 		print_map(buffer);
 		start_resolver(data);
-		// FIXME: Algorithm????
 	}
 	else
 		ft_putstr("ERROR\n");

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:55:36 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:00:25 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-static t_path		*compute_paths_size(t_path *paths)
+static t_path	*compute_paths_size(t_path *paths)
 {
 	t_path		*tmp;
 
@@ -40,7 +52,7 @@ static void		reset_connections(t_graph *graph, int *bol)
 		if (!graph->connections->link->ran && !graph->connections->link->end)
 			*bol = 1;
 		if (graph->connections->link->weight == graph->weight - 1
-			&& graph->connections->link->ran == 0)
+				&& graph->connections->link->ran == 0)
 			i = 1;
 		graph->connections = graph->connections->next;
 	}
@@ -49,7 +61,7 @@ static void		reset_connections(t_graph *graph, int *bol)
 	graph->connections = start_connections;
 }
 
-static t_path			*compute_paths(t_graph *graph)
+static t_path	*compute_paths(t_graph *graph)
 {
 	t_path	*prev;
 	t_path	*start;

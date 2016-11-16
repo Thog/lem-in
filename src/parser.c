@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:56:27 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:07:25 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static int		is_command(char *data)
@@ -30,7 +42,8 @@ int				check_command(t_array **map, t_graph **graph)
 		return (cmd);
 	if ((*map)->next && (*map)->next->data)
 		*map = (*map)->next;
-	while (is_excluded_command((*map)->data) && (*map)->next && (*map)->next->data)
+	while (is_excluded_command((*map)->data) && (*map)->next &&
+			(*map)->next->data)
 		(*map) = (*map)->next;
 	if (!is_valid_identifier((*map)->data, *graph))
 		return (-1);

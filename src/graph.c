@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graph.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/16 08:56:16 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/16 09:05:46 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static t_graph		*search_graph(char *data, t_graph *graph)
@@ -22,7 +34,7 @@ static t_graph		*init_grah(char *data, int cmd)
 	t_graph	*graph;
 	char	**data_split;
 
-	if (!(graph = (t_graph *) malloc(sizeof(t_graph))))
+	if (!(graph = (t_graph *)ft_memalloc(sizeof(t_graph))))
 		return (NULL);
 	data_split = ft_strsplit(data, ' ');
 	graph->id = data_split[0];
@@ -39,7 +51,7 @@ static t_graph		*init_grah(char *data, int cmd)
 	return (graph);
 }
 
-t_graph		*init_new_graph(t_graph *graph, char *data, int cmd)
+t_graph				*init_new_graph(t_graph *graph, char *data, int cmd)
 {
 	t_graph	*new;
 	t_graph	*tmp;
