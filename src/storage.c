@@ -103,7 +103,10 @@ void			store_map(t_array **data)
 	while ((ret = get_next_line(0, &buffer)) > 0)
 	{
 		if (!buffer || !is_valid_line(buffer))
+		{
+			ret = -1;
 			break ;
+		}
 		*data = array_init(*data, ft_strdup(buffer));
 		ft_strdel(&buffer);
 	}
