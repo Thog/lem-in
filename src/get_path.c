@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 08:56:10 by tguillem          #+#    #+#             */
-/*   Updated: 2016/11/16 08:56:11 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/11/17 15:06:18 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,25 @@ static t_path	*compute_path_response(t_graph *graph, char *way, t_path *new)
 t_path			*get_path(t_graph *graph)
 {
 	t_path			*new;
-	t_connections	*links;
+	t_connections	*connections;
 	char			*way;
 
 	way = NULL;
 	new = ft_memalloc(sizeof(t_path));
-	links = graph->connections;
-	while (links && !graph->end)
+	connections = graph->connections;
+	while (connections && !graph->end)
 	{
-		if (links->link->weight == graph->weight - 1 && !links->link->ran)
+		if (connections->link->weight == graph->weight - 1 &&
+				!connections->link->ran)
 		{
 			way = compute_response_name(way, graph->id);
-			graph = links->link;
+			graph = connections->link;
 			if (!graph->end)
 				graph->ran = 1;
-			links = graph->connections;
+			connections = graph->connections;
 		}
 		else
-			links = links->next;
+			connections = connections->next;
 	}
 	return (compute_path_response(graph, way, new));
 }

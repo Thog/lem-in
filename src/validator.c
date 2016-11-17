@@ -81,19 +81,19 @@ static void		compute_weights(t_graph *graph, int weight, int *begin)
 int				is_valid(t_graph *graph)
 {
 	t_graph	*end;
-	t_graph	*run;
+	t_graph	*tmp;
 	int		begin;
 
 	begin = 0;
 	end = NULL;
-	run = graph;
-	while (run)
+	tmp = graph;
+	while (tmp)
 	{
-		if (run->begin)
+		if (tmp->begin)
 			begin = 1;
-		if (run->end)
-			end = run;
-		run = run->next;
+		if (tmp->end)
+			end = tmp;
+		tmp = tmp->next;
 	}
 	if (begin == 1 && end)
 	{

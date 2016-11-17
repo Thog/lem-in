@@ -6,7 +6,7 @@
 #    By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 17:03:41 by tguillem          #+#    #+#              #
-#    Updated: 2016/11/16 09:10:15 by tguillem         ###   ########.fr        #
+#    Updated: 2016/11/17 15:04:55 by tguillem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = gcc
 
 NAME = lem-in
 LIB = libft
-SRC = main.c parser_links.c parser.c storage.c graph.c validator.c utils.c \
-	  algorithm.c algorithm_utils.c get_path.c displayer.c destroyer.c
+SRC = main.c parser_connections.c parser.c storage.c graph.c validator.c \
+	  utils.c algorithm.c algorithm_utils.c get_path.c displayer.c destroyer.c
 SRCDIR = src
 OUTDIR = out
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_links.c                                     :+:      :+:    :+:   */
+/*   parser_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/16 08:56:31 by tguillem          #+#    #+#             */
-/*   Updated: 2016/11/16 09:06:16 by tguillem         ###   ########.fr       */
+/*   Created: 2016/11/17 15:04:10 by tguillem          #+#    #+#             */
+/*   Updated: 2016/11/17 15:04:13 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	link_graph_one(t_graph *tmp1, t_graph *tmp2)
 {
 	t_connections	*new;
-	t_connections	*run;
+	t_connections	*connections;
 
 	if (!(new = (t_connections*)ft_memalloc(sizeof(t_connections))))
 		return ;
@@ -26,10 +26,10 @@ static void	link_graph_one(t_graph *tmp1, t_graph *tmp2)
 		tmp1->connections = new;
 		return ;
 	}
-	run = tmp1->connections;
-	while (run->next)
-		run = run->next;
-	run->next = new;
+	connections = tmp1->connections;
+	while (connections->next)
+		connections = connections->next;
+	connections->next = new;
 }
 
 static void	link_graph(char *line, t_graph **graph)
@@ -38,20 +38,20 @@ static void	link_graph(char *line, t_graph **graph)
 	char	*id2;
 	t_graph	*tmp1;
 	t_graph	*tmp2;
-	t_graph	*run;
+	t_graph	*res;
 
-	run = *graph;
+	res = *graph;
 	id1 = line;
 	id2 = ft_strchr(line, '-');
 	*id2 = '\0';
 	id2++;
-	while (run)
+	while (res)
 	{
-		if (ft_strcmp(run->id, id1) == 0)
-			tmp1 = run;
-		if (ft_strcmp(run->id, id2) == 0)
-			tmp2 = run;
-		run = run->next;
+		if (ft_strcmp(res->id, id1) == 0)
+			tmp1 = res;
+		if (ft_strcmp(res->id, id2) == 0)
+			tmp2 = res;
+		res = res->next;
 	}
 	link_graph_one(tmp1, tmp2);
 	link_graph_one(tmp2, tmp1);

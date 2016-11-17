@@ -12,43 +12,43 @@
 
 #include "lemin.h"
 
-static void			select_path_next(char **new, t_path **run)
+static void			select_path_next(char **new, t_path **path)
 {
 	char		*tmp;
 
-	tmp = ft_strchr((*run)->path + 1, '-');
+	tmp = ft_strchr((*path)->path + 1, '-');
 	if (tmp)
 	{
 		*new = ft_strdup(tmp);
-		free((*run)->path);
-		(*run)->path = *new;
+		free((*path)->path);
+		(*path)->path = *new;
 	}
 	else
 	{
-		free((*run)->path);
-		(*run)->path = NULL;
+		free((*path)->path);
+		(*path)->path = NULL;
 	}
 }
 
 static t_path		*select_path(t_path *move)
 {
-	t_path		*run;
+	t_path		*tmp;
 	char		*new;
 	t_path		*prev;
 
-	run = move;
+	tmp = move;
 	prev = NULL;
-	while (run)
+	while (tmp)
 	{
-		if (run->path)
-			select_path_next(&new, &run);
-		prev = run;
-		run = run->next;
+		if (tmp->path)
+			select_path_next(&new, &tmp);
+		prev = tmp;
+		tmp = tmp->next;
 	}
 	return (prev);
 }
 
-static void			display_move_next(t_path *run, int *i)
+static void			display_move_next(t_path *path, int *i)
 {
 	char		*tmp;
 
@@ -56,10 +56,10 @@ static void			display_move_next(t_path *run, int *i)
 		ft_putchar(' ');
 	*i = 1;
 	ft_putstr("L");
-	ft_putnbr(run->size);
-	if ((tmp = ft_strchr(run->path + 1, '-')))
+	ft_putnbr(path->size);
+	if ((tmp = ft_strchr(path->path + 1, '-')))
 		*tmp = '\0';
-	ft_putstr(run->path);
+	ft_putstr(path->path);
 	if (tmp)
 		*tmp = '-';
 }
@@ -67,15 +67,15 @@ static void			display_move_next(t_path *run, int *i)
 static t_path		*display_move(t_path *move)
 {
 	int			i;
-	t_path		*run;
+	t_path		*tmp;
 
 	i = 0;
-	run = move;
-	while (run)
+	tmp = move;
+	while (tmp)
 	{
-		if (run->path)
-			display_move_next(run, &i);
-		run = run->next;
+		if (tmp->path)
+			display_move_next(tmp, &i);
+		tmp = tmp->next;
 	}
 	if (i == 0)
 		return (NULL);
@@ -85,20 +85,20 @@ static t_path		*display_move(t_path *move)
 
 t_path				*move_ant(t_data *data, t_path *paths, t_path *move)
 {
-	t_path		*run;
+	t_path		*tmp;
 	t_path		*res;
 	int			i;
 
 	i = 0;
-	run = paths;
+	tmp = paths;
 	res = move;
 	move = select_path(move);
-	while (run && (data->ant_count >= run->size || i == 0) &&
+	while (tmp && (data->ant_count >= tmp->size || i == 0) &&
 			data->ant_count > 0)
 	{
 		i = 1;
-		move = get_next_move(data, run->path, move);
-		run = run->next;
+		move = get_next_move(data, tmp->path, move);
+		tmp = tmp->next;
 		if (!res)
 			res = move;
 	}
