@@ -12,28 +12,28 @@
 
 #include "lemin.h"
 
-static char		*compute_response_name(char *way, char *add)
+static char		*compute_response_name(char *path, char *add)
 {
-	if (!way)
+	if (!path)
 		return (ft_strdup(add));
-	way = ft_strfjoin(way, "-");
-	way = ft_strfjoin(way, add);
-	return (way);
+	path = ft_strfjoin(path, "-");
+	path = ft_strfjoin(path, add);
+	return (path);
 }
 
-static t_path	*compute_path_response(t_graph *graph, char *way, t_path *new)
+static t_path	*compute_path_response(t_graph *graph, char *path, t_path *new)
 {
 	if (!graph->end)
 	{
-		free(way);
+		free(path);
 		free(new);
 		return (NULL);
 	}
-	way = compute_response_name(way, graph->id);
-	if (ft_count_char(way, '-') == 1)
+	path = compute_response_name(path, graph->id);
+	if (ft_count_char(path, '-') == 1)
 		graph->weight--;
 	new->next = NULL;
-	new->path = way;
+	new->path = path;
 	return (new);
 }
 
@@ -41,9 +41,9 @@ t_path			*get_path(t_graph *graph)
 {
 	t_path			*new;
 	t_connections	*connections;
-	char			*way;
+	char			*path;
 
-	way = NULL;
+	path = NULL;
 	new = ft_memalloc(sizeof(t_path));
 	connections = graph->connections;
 	while (connections && !graph->end)
@@ -51,7 +51,7 @@ t_path			*get_path(t_graph *graph)
 		if (connections->link->weight == graph->weight - 1 &&
 				!connections->link->ran)
 		{
-			way = compute_response_name(way, graph->id);
+			path = compute_response_name(path, graph->id);
 			graph = connections->link;
 			if (!graph->end)
 				graph->ran = 1;
@@ -60,5 +60,5 @@ t_path			*get_path(t_graph *graph)
 		else
 			connections = connections->next;
 	}
-	return (compute_path_response(graph, way, new));
+	return (compute_path_response(graph, path, new));
 }

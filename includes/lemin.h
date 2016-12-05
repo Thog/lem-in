@@ -16,12 +16,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct				s_lst
-{
-	char					*line;
-	struct s_lst			*next;
-}							t_lst;
-
 typedef struct				s_path
 {
 	char					*path;
